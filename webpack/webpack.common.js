@@ -23,7 +23,18 @@ module.exports = {
       { from: Path.resolve(__dirname, '../public'), to: 'public' }
     ]),
     new HtmlWebpackPlugin({
-      template: Path.resolve(__dirname, '../src/index.html')
+      template: Path.resolve(__dirname, '../src/index.html'),
+      hash: true,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'oilgallery.html',
+      template: Path.resolve(__dirname, '../src/oilgallery.html'),
+      hash: true,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'watercolourgallery.html',
+      template: Path.resolve(__dirname, '../src/watercolourgallery.html'),
+      hash: true,
     })
   ],
   resolve: {

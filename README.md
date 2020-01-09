@@ -1,9 +1,6 @@
-# Webpack Frontend Starterkit
+# Paul Weston Art
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/wbkd/webpack-starter.svg)](https://greenkeeper.io/)
-
-A lightweight foundation for your next webpack based frontend project.
-
+This is a copy of current website www.paulwestonart.co.uk
 
 ### Installation
 

@@ -1,0 +1,35 @@
+$breakpoint-small: 620px;
+$breakpoint-medium: 1000px;
+@mixin screen($size){
+  @if $size == 'small'{
+    @media only screen and (max-width: $breakpoint-small - 1){
+      @content
+    }
+  }
+  @else if $size == 'medium'{
+    @media only screen and (min-width: $breakpoint-small){
+      @content
+    }
+  }
+  @else if $size == 'large'{
+    @media only screen and (min-width: $breakpoint-medium){
+      @content
+    }
+  }
+}
+
+/*
+exapmple
+body {
+  color: $body-color;
+  @include screen(small){
+    background-color: #FFFFE4;
+  }
+  @include screen(medium){
+    background-color: #eee;
+  }
+  @include screen(large){
+    background-color: yellow;
+  }
+}
+ */

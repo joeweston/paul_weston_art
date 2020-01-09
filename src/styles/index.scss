@@ -1,5 +1,305 @@
-$body-color: blue;
+@import "reset";
+@import "breakpoints";
+/**==========================================================================
+ * Main Page settings
+ ==========================================================================*/
+$main-font-family: 'Roboto', sans-serif;
 
-body {
-  color: $body-color;
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body{
+  font-family: $main-font-family;
+  font-size: 16px;
+  line-height: 24px;
+  background-color: #fafafa;
+}
+a{
+  font-family: $main-font-family;
+}
+h2{
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+
+/**==========================================================================
+ * Logo and Nav bar including settings for elelments that
+ * come imediatley after.
+ ==========================================================================*/
+$logo-height: 80px;
+$logo-height-large: 120px;
+$navigation-height: 50px;
+#header{
+  h1{
+    height: $logo-height;
+    @include screen(large){
+      height: $logo-height-large;
+    }
+    background: url("../../public/images/paulweston_logo2.png") no-repeat center/290px;
+    * {
+      visibility: hidden;
+    }
+  }
+  box-shadow: inset 0 220px 186px -130px #fff;
+  @include screen(small){
+    height: $navigation-height * 3 + $logo-height;
+  }
+  @include screen(medium){
+    height: $navigation-height + $logo-height;
+  }
+  @include screen(large){
+    height: $navigation-height + $logo-height-large;
+  }
+  background-color: #eee;
+  width: 100%;
+  z-index: 1;
+  top: 0; 
+  @include screen(small){
+    position: absolute;
+  }
+  @include screen(medium){
+    position: fixed;
+  }
+  #nav{
+    display: flex;
+    justify-content: space-around;
+    @include screen(small){
+      flex-direction: column;
+    } 
+    box-shadow:inset 0 16px 16px -11px #ffffff, inset 0 -16px 16px -11px #999;
+    li{
+      width: 100%;
+      font-family: 'Rasa', serif;
+      letter-spacing: 3px;
+      font-size: 20px;
+      line-height: $navigation-height;
+      @include screen(small){
+        box-shadow:inset 0 16px 16px -11px #ffffff, inset 0 -16px 16px -11px #ddd;
+      }
+      a{
+        text-decoration: none;
+        color: #333;
+        display:block;
+        text-align: center;
+        transition: 0.3s;
+        &:hover{
+          box-shadow: inset 0 -56px 16px -11px #ffffff;
+        }
+      }
+    }
+    #active{
+      background-color: #fff;
+      z-index: -1;
+      a:hover{
+      }
+    }
+  }
+}
+body > div:nth-child(2) {
+  margin-top: $navigation-height + $logo-height;
+  @include screen(small){
+    margin-top: $navigation-height * 3 + $logo-height;
+  }   
+  @include screen(large){
+    margin-top: $navigation-height + $logo-height-large;
+  } 
+}
+@include screen(small){
+  body > div:nth-child(3) {
+    margin-top: $navigation-height * 3 + $logo-height;   
+  }
+}
+
+/**==========================================================================
+ * Full screen parralax images image
+ ==========================================================================*/
+.parallax{
+  @include screen(small){
+    display: none;
+  }
+  @include screen(medium){
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: calc(90vh - 180px);
+    border-bottom: 1px solid black;
+  }
+}
+.first-parallax{
+  @extend .parallax;
+  background-image: url("../../public/images/oil/grey_skies_over_hammersmith_slide.jpg");
+}
+.second-parallax{
+  @extend .parallax;
+  border-top: 1px solid black;
+  background-image: url("../../public/images/watercolour/parc_y_brain_upper_slide.jpg");
+}
+
+
+/**==========================================================================
+ * About section on main page.
+ ==========================================================================*/
+$about-gap: 40px;
+$about-column-width: 290px;
+#about{
+  margin-left: auto;
+  margin-right: auto;
+  padding: 40px 0 40px 0;
+  display: grid;
+  row-gap: 40px;
+  grid-auto-rows: auto;
+  *{
+    width: 100%;
+  }
+  @include screen(small){
+    grid-template-columns: 20px 1fr 20px;
+    grid-template-areas:
+    ". a ."
+    "b b b"
+    ". c ."
+    "d d d"
+    ". e .";
+  }
+  @include screen(medium){
+    width: 540px;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas:
+      "a a a a . b b b b"
+      "c c c c c c c c c"
+      "d d d . e e e e e";    
+  }
+  @include screen(large){
+    width: 950px;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-areas:
+      "a a a a . b b b b"
+      "c c c c . b b b b"
+      "d d d . e e e e e";   
+  }
+  *:nth-child(1){
+    grid-area: a;
+  }
+  *:nth-child(2){
+    grid-area: b;
+  }
+  *:nth-child(3){
+    grid-area: c;
+  }
+  *:nth-child(4){
+    grid-area: d;
+  }
+  *:nth-child(5){
+    grid-area: e;
+  }
+  figure{
+    text-align: center;
+    align-self: center;
+  }
+  figcaption {
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 6px;
+  }
+
+}
+
+
+/**==========================================================================
+ * Gallery, both oil and watercolour
+ ==========================================================================*/
+$grid-gap: 40px;
+$grid-column-width: 290px;
+.gallery{
+  margin: 0 auto 40px;
+  display: grid;
+  gap: $grid-gap;
+  grid-auto-rows: auto;
+  @include screen(small){
+    width: $grid-column-width;
+    grid-template-columns: $grid-column-width;
+  }
+  @include screen(medium){
+    width: $grid-column-width * 2 + $grid-gap; 
+    grid-template-columns: $grid-column-width $grid-column-width;
+  }
+  @include screen(large){
+    width: $grid-column-width * 3 + $grid-gap * 2;
+    grid-template-columns: $grid-column-width $grid-column-width $grid-column-width;
+  }
+  padding-top: 40px;
+  * {
+    text-align: center;
+    align-self: center;
+    .gallery_image {
+      height: auto;
+      width: auto;
+      max-height: 290px;
+      max-width: 290px;
+    }
+  }
+  figcaption {
+    font-size: 14px;
+    border-bottom: 1px solid #ddd;
+    padding: 20px 10px;
+  }
+  spot{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+  .green-spot{
+    @extend spot;
+    background-color: #33bb33;
+  }
+  .red-spot{
+    @extend spot;
+    background-color: #ee3333;
+  }
+}
+
+#footer{
+  padding: 40px 20% 80px 20%;
+  background-color: #eee;
+  @include screen(small){
+    margin-top: 0;
+  }
+  h2{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    padding: 30px;
+    margin: 0 20% 20px 20%;
+    font-size: 20px;
+    text-align: center;
+  }
+  p{
+    margin: auto;
+    line-height: 30px;
+    max-width: 400px;
+  }
+  .info{
+    float: right;
+  }
+  #social-links{
+    margin: auto;
+    max-width: 400px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+
+
+
+
+
+ 
